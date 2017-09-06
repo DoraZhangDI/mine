@@ -1,0 +1,95 @@
+{% extends "share/base.html" %}
+{% load staticfiles %}
+{% block mainbody %}
+    <div class="account-container">
+
+        <div class="content clearfix">
+
+            <form id="loginform">
+{#                <form id="loginform" action="/signin/" method="post">#}
+
+                <h1>登录</h1>
+
+                <div class="login-fields">
+
+                    <span class ='loginError' style="color: red"></span>
+
+                    <div class="field">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" value="" placeholder="请输入用户名"
+                               class="login username-field"/>
+                    </div>
+                    <!-- /field -->
+
+                    <div class="field">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" value="" placeholder="密码"
+                               class="login password-field"/>
+                    </div>
+                    <!-- /password -->
+
+                </div>
+                <!-- /login-fields -->
+
+                <div class="login-actions">
+
+				<span class="login-checkbox">
+					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice"
+                           tabindex="4"/>
+					<label class="choice" for="Field">记住我</label>
+				</span>
+
+                    <button id="submitid" type="submit" value="登录" class="button btn btn-success btn-large">登录</button>
+
+                </div>
+                <!-- .actions -->
+
+
+            </form>
+        </div>
+        <!-- /content -->
+
+    </div> <!-- /account-container -->
+
+    <!-- Text Under Box -->
+    <div class="login-extra">
+        没有账号? <a href="signup.html">去注册</a>
+    </div> <!-- /login-extra -->
+    <script type="text/javascript">
+        $('#loginform').submit(
+                function(){
+                    var username = $('#username').val();
+                    var password = $('#password').val();
+                    if(!username){
+                        $('.loginError').html('用户名不符合规范').show();
+                        return false;
+                    }
+                    if(!password){
+                        $('.loginError').html('密码不符合规范').show();
+                        return false;
+                    }
+{#                    $.ajaxSetup({#}
+{#                        data: {csrfmiddlewaretoken: '{{ csrf_token }}' },#}
+{#                    });#}
+                    $.ajax({
+                        type:"POST",
+                        url: '/login/',
+                        data: {username:username, password:password},
+                        dataType:'json',
+                        cache:false,
+                        success: function(data) {
+                            if(data.data == 1 ){
+                                location.href = '/univar';
+                            }
+                            else if(data.data == -1 || data.data == 0 ){
+                                $('.loginError').html('用户名不存在或者用户名密码不匹配').show();
+                            }
+                        },
+                        error: function() {
+                            $('.loginError').html('请求失败，请刷新页面后重试').show();
+                        }
+                    });
+                    return false;
+                });
+    </script>
+{% endblock %}
