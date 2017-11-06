@@ -7,5 +7,10 @@
       <schema-pattern>amazon.*</schema-pattern>
       <default-schemas>amazon.*</default-schemas>
     </data-source>
+    <data-source name="Django default" uuid="3963a68d-6163-41eb-90a8-4aeaf9c39128">
+      <first-sync>true</first-sync>
+      <user-name>root</user-name>
+      <user-password>dfd8dfc5dfc5dfdedf9bdf98df99</user-password>
+    </data-source>
   </component>
 </project>

@@ -22,4 +22,7 @@
       <index name="sharedid" unique="true" columns="sharedid"/>
     </table>
   </data-source>
+  <data-source name="Django default" uuid="3963a68d-6163-41eb-90a8-4aeaf9c39128">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>
